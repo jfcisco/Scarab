@@ -15,7 +15,23 @@
         <div id="anime-list" class="row list-group">
 
         </div>
-    </div>    
+
+        <div id="controls" class="row">
+            <button 
+                class="btn btn-lg btn-primary"
+                onclick="handlePlayButton()">
+                Play/Pause
+            </button>
+            
+            <button 
+                class="btn btn-lg btn-primary"
+                onclick="handleFullScreenButton()">
+                Fullscreen
+            </button>
+
+            <input name="episode" type="text" inputmode="numeric" pattern="[0-9]*">
+        </div>
+    </div>
 
     <script src="scripts.js"></script>
 </body>

@@ -27,5 +27,38 @@ function animeListToHtml(animeList) {
 }
 
 function handleAnimeSelection(id) {
-    fetch("/api/Anime/" + id);
+    var requestUrl = "/api/Anime/" + id;
+    var episodeNumber = document.querySelector(`input[name="episode"]`).value;
+
+    if (episodeNumber !== null)
+    {
+        requestUrl += "/" + episodeNumber;
+    }
+
+    fetch(requestUrl);
+}
+
+function handlePlayButton() {
+    fetch("/api/Anime/player", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify("PLAY")
+    });
+}
+
+function handleFullScreenButton() {
+    fetch("/api/Anime/player", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify("FULLSCREEN")
+    });
+}
+
+function handleFormSubmit(event) {
+    event.preventDefault();
+    
 }
