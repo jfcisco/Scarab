@@ -22,7 +22,7 @@ namespace Server
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AnimeContext>(opt =>
-                opt.UseInMemoryDatabase("AnimeList"));
+                opt.UseSqlite("Data Source=anime.db"));
             services.AddSingleton<IPlayer, WebPlayer>();
             services.AddControllers();
         }
