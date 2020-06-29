@@ -17,18 +17,18 @@ namespace Player.Tests
         [Fact]
         public void WebPlayerCanPlayBerserk()
         {
-            player.Play("berserk");
+            player.ViewAnime("berserk");
         }
 
-        [Fact]
-        public void WebPlayerCanGoToAnEpisode()
-        {
+        // [Fact]
+        // public void WebPlayerCanGoToAnEpisode()
+        // {
 
-        }
+        // }
 
         public void Dispose()
         {
-            player.Dispose();
+            // player.Dispose();
         }
     }
 }
