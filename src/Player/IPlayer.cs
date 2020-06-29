@@ -2,6 +2,8 @@ namespace Player
 {
     public interface IPlayer
     {
-        void Play(string relativeUrl);   
+        void ViewAnime(string relativeUrl, int episodeNumber = 1);
+        void Play();
+        void ToggleFullScreen();
     }
 }
