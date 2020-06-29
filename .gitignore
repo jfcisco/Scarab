@@ -1,4 +1,8 @@
+# Ignore dotnet files
 .vscode/
 bin/
 obj/
+*.log
+
+# Ignore Mac files
 .DS_Store
