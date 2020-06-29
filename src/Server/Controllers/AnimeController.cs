@@ -41,7 +41,23 @@ namespace Server.Controllers
                 return NotFound();
             }
 
-            _player.Play(anime.RelativeUrl);
+            _player.ViewAnime(anime.RelativeUrl);
+            
+            return anime;
+        }
+
+        // GET: api/Anime/5/1
+        [HttpGet("{id}/{ep}")]
+        public async Task<ActionResult<Anime>> GetAnime(long id, int ep)
+        {
+            var anime = await _context.AnimeList.FindAsync(id);
+
+            if (anime == null)
+            {
+                return NotFound();
+            }
+
+            _player.ViewAnime(anime.RelativeUrl, ep);
             
             return anime;
         }
@@ -88,6 +104,27 @@ namespace Server.Controllers
             await _context.SaveChangesAsync();
 
             return CreatedAtAction(nameof(GetAnime), new { id = anime.Id }, anime);
+        }
+
+        // POST: api/Anime/player
+        // Handle commands to the player
+        [HttpPost("player")]
+        public async Task<IActionResult> PostPlayer([FromBody] string command)
+        {
+            await Task.Run(() => {
+                switch (command.ToUpper())
+                {
+                    case "PLAY":
+                        _player.Play();
+                        break;
+                    
+                    case "FULLSCREEN":
+                        _player.ToggleFullScreen();
+                        break;
+                }
+            });
+
+            return NoContent();
         }
 
         // DELETE: api/Anime/5
