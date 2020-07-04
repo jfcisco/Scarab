@@ -50,7 +50,7 @@ namespace Server.Controllers
         [HttpGet("{id}/{ep}")]
         public async Task<ActionResult<Anime>> GetAnime(long id, int ep)
         {
-            var anime = await _context.AnimeList.FindAsync(id);
+            Anime anime = await _context.AnimeList.FindAsync(id);
 
             if (anime == null)
             {
