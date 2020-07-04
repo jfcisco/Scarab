@@ -23,7 +23,14 @@ namespace Server
         {
             services.AddDbContext<AnimeContext>(opt =>
                 opt.UseSqlite("Data Source=anime.db"));
-            services.AddSingleton<IPlayer, WebPlayer>();
+
+            // Add Player Service for playing anime episodes
+            // Implement using ChromeDriver
+            string chromePath = Configuration["ChromeDriverPath"];
+            services.AddSingleton<IPlayer>(new WebPlayer(chromePath));
+
+            services.AddCors();
+
             services.AddControllers();
         }
 
@@ -35,15 +42,20 @@ namespace Server
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
+            // app.UseHttpsRedirection();
             
             app.UseDefaultFiles();
             app.UseStaticFiles();
-
             app.UseRouting();
 
+            app.UseCors(builder => 
+                    {
+                        builder
+                        .AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader();
+                    });
             app.UseAuthorization();
-
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
