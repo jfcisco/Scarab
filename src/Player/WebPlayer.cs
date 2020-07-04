@@ -9,17 +9,21 @@ namespace Player
     public class WebPlayer : IPlayer, IDisposable
     {
         private const string STREAM_SOURCE = @"https://twist.moe/a/";
-        private readonly string CHROME_PATH = Environment.GetEnvironmentVariable("CHROMEDRIVER_PATH");
         private readonly WebDriverWait wait;
         private IWebDriver driver;
-        public WebPlayer()
+
+        /// <summary>
+        /// WebPlayer that takes the path to the chromedriver as the only parameter
+        /// </summary>
+        /// <param name="chromePath"></param>
+        public WebPlayer(string chromePath)
         {
             // Configure ChromeOptions
             var options = new ChromeOptions();
             options.AddExcludedArgument("enable-automation");
 
             // create webdriver
-            driver = new ChromeDriver(CHROME_PATH, options);
+            driver = new ChromeDriver(chromePath, options);
             driver.Manage().Window.Maximize(); 
 
             // Configure explicit wait for UI interactions
